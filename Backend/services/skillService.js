@@ -1,7 +1,7 @@
 const skillModel=require('../models/skillModel');
 
 
-skills.syncIndexes();
+// skills.syncIndexes();
 exports.createSkill=async(req,res)=> {
     try {
       const data = await skills.create(req.body);
@@ -12,7 +12,7 @@ exports.createSkill=async(req,res)=> {
 };
 
 exports.getSkills= async (req, res) => {
-  const data = await skills.find();
+  const data = await skillModel.find();
   res.status(200).json({ data: data });
 };
 
