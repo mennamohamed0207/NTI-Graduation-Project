@@ -15,6 +15,8 @@ exports.getSkills= async (req, res) => {
   const data = await skillModel.find();
   res.status(200).json({ data: data });
 };
+//type:mongoose.Schema.Types.ObjectId
+//ref:'skills'  
 
 
 exports.deleteSkill= async (req, res) => {

@@ -1,16 +1,19 @@
 const express = require("express");
-const globalError = require("./middleware/errorMiddleware");
 const dotenv = require("dotenv");
+const morgan=require('morgan')
 const apiError = require("./utils/apiError");
-const port = 3000;
 dotenv.config({
   path: ".env",
 });
-const app = express();
 const dbConnection = require("./config/database.js");
-dbConnection();
 //routes
 const skillsRoute = require("./routes/skillRoute");
+const globalError = require("./middleware/errorMiddleware");
+const port = 3000;
+dbConnection();
+const app = express();
+app.use(express.json());
+app.use(morgan('dev'))
 
 //Mount Routes
 app.use("/api/v1/skills", skillsRoute);

@@ -11,6 +11,6 @@ const skill=mongoose.Schema({
         enum: ["Backend", "Frontend", "Programming Languages"]
     }
 })
-const skillModel=new mongoose.model("skills",skill);
+const skillModel= mongoose.model("skills",skill);
 
-module.export=skillModel;
+module.exports=skillModel;
