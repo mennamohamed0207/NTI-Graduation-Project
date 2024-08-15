@@ -8,6 +8,10 @@ dotenv.config({
 const dbConnection = require("./config/database.js");
 //routes
 const skillsRoute = require("./routes/skillRoute");
+const expRoute = require("./routes/expRoute.js");
+
+
+
 const globalError = require("./middleware/errorMiddleware");
 const port = 3000;
 dbConnection();
@@ -17,6 +21,7 @@ app.use(morgan('dev'))
 
 //Mount Routes
 app.use("/api/v1/skills", skillsRoute);
+app.use("/api/v1/exp", expRoute);
 
 app.all("*", (req, res, next) => {
   next(new apiError(`can't find ${req.originalUrl} on this server`, 404));
