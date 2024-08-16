@@ -11,7 +11,12 @@ import { ExperienceComponent } from './experience/experience.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { EducationComponent } from './education/education.component';
 import { FooterComponent } from './footer/footer.component';
-import { provideHttpClient } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { GithubCardComponent } from './projects/github-card/github-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
+import { HttpLink, InMemoryCache } from '@apollo/client';
+import { GithubCalenderComponent } from './github-calender/github-calender.component';
 
 @NgModule({
   declarations: [
@@ -23,15 +28,21 @@ import { provideHttpClient } from '@angular/common/http';
     ExperienceComponent,
     ProjectsComponent,
     EducationComponent,
-    FooterComponent],
+    FooterComponent,
+    GithubCardComponent,
+    GithubCalenderComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule
-    
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,   // Required for Apollo Client to work with HTTP
+    ApolloModule,
+  
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient()
+    provideHttpClient(),
+    
   ],
   bootstrap: [AppComponent]
 })

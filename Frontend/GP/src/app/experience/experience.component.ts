@@ -18,7 +18,7 @@ export class ExperienceComponent implements OnInit {
   reloadPage() {
     this.router.navigate([this.router.url])
       .then(() => {
-        window.location.reload();
+        // window.location.reload();
       });
   }
 
