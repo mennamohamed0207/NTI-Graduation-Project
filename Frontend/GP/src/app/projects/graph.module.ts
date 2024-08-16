@@ -15,7 +15,7 @@ export function provideApollo(httpLink: HttpLink) {
     }));
     const authLink = new ApolloLink((operation, forward) => {
         // Get the authentication token from local storage if it exists
-        const token = "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"; //Your github token here
+        const token = ""; //Your github token here
         
         // Use the setContext method to set the HTTP headers.
         operation.setContext({
