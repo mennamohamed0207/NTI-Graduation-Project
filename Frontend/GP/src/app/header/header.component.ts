@@ -43,6 +43,7 @@ import {animate, group, query, state, style, transition, trigger} from "@angular
   ]
 })
 export class HeaderComponent implements OnInit {
+ExperienceComponent: any;
 
   constructor() { }
   greeting= {

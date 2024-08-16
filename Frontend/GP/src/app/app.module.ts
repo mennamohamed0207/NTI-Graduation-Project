@@ -26,7 +26,7 @@ import { provideHttpClient } from '@angular/common/http';
     FooterComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule
     
   ],
   providers: [

@@ -7,11 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class ExperienceService {
 
-  postApi = 'http://127.0.0.1:3000/api/v1/exp/';
+  getExperienceUrl = 'http://127.0.0.1:3000/api/v1/exp/';
+  getaboutUrl = 'http://127.0.0.1:3000/api/v1/about/';
   constructor(private http: HttpClient) {
 
   }
   getExperience(): Observable<any> {
-    return this.http.get(this.postApi);
+    return this.http.get(this.getExperienceUrl);
+  }
+  getAbout(): Observable<any> {
+    return this.http.get(this.getaboutUrl);
   }
 }
