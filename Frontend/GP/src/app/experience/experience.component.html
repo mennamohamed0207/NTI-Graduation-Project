@@ -6,7 +6,7 @@
                 <h1 class="timeline-heading" style="font-weight: bolder;">Experience 💻</h1>
             </div>
         </div>
-        <div class="prt_about_learnsection">
+        <div class="prt_about_learnsection" *ngIf="timeline">
             <div *ngFor="let i of timeline let count=index" wmAnimate="landing" aos speed="normal">
                 <div [ngClass]="{'mar-right': count % 2 != 0, 'mar-left': count % 2 == 0}">
                     <div
@@ -18,15 +18,18 @@
                         <div class="prt_about_learnbox_info">
                             <h4 [ngClass]="{'right': count % 2 != 0, 'left': count % 2 == 0}">{{i.title}}</h4>
                             <h4 [ngClass]="{'right-org': count % 2 != 0, 'left': count % 2 == 0}">{{i.org}}</h4>
-                            <ul >
+                            <ul>
                                 <div *ngFor="let i of i.description">
-                                    <li  class="bullet">{{i}}</li>
+                                    <li class="bullet">{{i}}</li>
                                 </div>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div *ngIf="!timeline">
+            Loading...
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ExperienceService } from '../services/experience.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +10,11 @@ import { ExperienceService } from '../services/experience.service';
 export class HomeComponent {
   constructor(private dataService: ExperienceService) { }
   about :string = ""
+  private subscription: Subscription | undefined;
+
   ngOnInit(): void {
-    this.dataService.getAbout().subscribe(
+    this.subscription = this.dataService.getAbout().subscribe(
       (data) => {
-       console.log(data.data[0].about);
        this.about =data.data[0].about;
       }
     )
@@ -29,5 +31,10 @@ export class HomeComponent {
       resumeLink: "https://drive.google.com/file/d/1wKpkFRLQBiBWQYFYoCnT--nDyHxKO7lC/view?usp=drive_link",
       paragragh:this.about
     };
+    ngOnDestroy(): void {
+      if (this.subscription) {
+        this.subscription.unsubscribe();
+      }
+    }
 
 }

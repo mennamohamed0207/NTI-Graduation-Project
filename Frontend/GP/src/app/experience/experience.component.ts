@@ -1,41 +1,63 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ExperienceService } from '../services/experience.service';
-import { ActivatedRoute, NavigationEnd, Route } from '@angular/router';
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-experience',
   templateUrl: './experience.component.html',
   styleUrls: ['./experience.component.scss']
 })
-export class ExperienceComponent implements OnInit {
+export class ExperienceComponent implements OnInit,OnDestroy {
 
-  timeline :any;
-  constructor(private dataService: ExperienceService,private route: Router,private window:Location) {
+  timeline: any;
+  private subscription: Subscription | undefined;
 
-    this.route.routeReuseStrategy.shouldReuseRoute = function(){
-      return false;
+  constructor(private dataService: ExperienceService, private route: ActivatedRoute) {
+    console.log("experience Con");
+    // this.router.events.subscribe((event) => {
+    //   if (event instanceof NavigationEnd) {
+    //     this.loadData(); // Trigger data loading on navigation
+    //   }
+    // });
+  //  this.loadData();
+  }
+  // ngOnChanges(): void {
+  //   console.log("experience change");
+
+  //   this.loadData();  // Load data whenever inputs change
+  // }
+
+  loadData(): void {
+    this.subscription = this.dataService.getExperience().subscribe(
+      (data) => {
+        this.timeline = data.data;
+      }
+    );
+  }
+ 
+  
+  ngAfterViewInit(): void {
+    console.log("experience view init");
+    
+    this.loadData();  // Called after the component's view has been initialized
   }
 
+  // ngOnInit(): void {
+  //   console.log("experience init ");
+  //   this.loadData();
+  
+  // }
 
-  //   this.route.events.subscribe((evt) => {
-  //      if (evt instanceof NavigationEnd) {
-  //         // trick the Router into believing it's last link wasn't previously loaded
-  //         this.route.navigated = false;
-  //         // if you need to scroll back to top, here is the right place
-  //         window.go('/experience');
-  //      }
-  //  });
-}
-  ngOnInit(): void {
-    // this.reloadPage();
-    this.dataService.getExperience().subscribe(
-      (data) => {
-      //  console.log(data.data);
-       this.timeline = data.data
-      }
-    )
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.loadData();
+    });
+  }
 
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

@@ -6,6 +6,7 @@ import { ExperienceComponent } from './experience/experience.component';
 import { SkillsComponent } from './skills/skills.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { EducationComponent } from './education/education.component';
+import { DataResolver } from './dataResolver';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -19,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: "experience",
-    component: ExperienceComponent
+    component: ExperienceComponent,
   }, {
     path: "skills",
     component: SkillsComponent

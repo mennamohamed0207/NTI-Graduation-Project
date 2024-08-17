@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan=require('morgan')
+const cors=require('cors')
 const apiError = require("./utils/apiError");
 dotenv.config({
   path: ".env",
@@ -21,6 +22,7 @@ dbConnection();
 const app = express();
 app.use(express.json());
 app.use(morgan('dev'))
+app.use(cors())
 
 //Mount Routes
 app.use("/api/v1/skills", skillsRoute);
