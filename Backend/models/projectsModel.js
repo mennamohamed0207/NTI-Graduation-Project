@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-const skill=mongoose.Schema({
+const projectSchema=mongoose.Schema({
     name:{
         type:String,
         required:true,
@@ -16,8 +16,21 @@ const skill=mongoose.Schema({
         type:Array,
         required:true
     },
-    
-})
-const skillModel= mongoose.model("skills",skill);
+    id:{
+        type:Number,
+        index:true,
 
-module.exports=skillModel;
+    },
+    role:{
+        type:Array  ,
+        required:true
+    },
+   tools: {
+        type: Array,
+        required: true,
+    }
+
+})
+const projectModel= mongoose.model("projects",projectSchema);
+
+module.exports=projectModel;
