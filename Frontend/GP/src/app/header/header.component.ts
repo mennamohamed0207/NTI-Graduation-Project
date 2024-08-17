@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, group, query, state, style, transition, trigger} from "@angular/animations";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -45,7 +46,7 @@ import {animate, group, query, state, style, transition, trigger} from "@angular
 export class HeaderComponent implements OnInit {
 ExperienceComponent: any;
 
-  constructor() { }
+  constructor(private router:Router) { }
   greeting= {
     username: "Menna Mohamed Abdelbaset",
     title: "Welcome, I'm Menna",
@@ -57,6 +58,15 @@ ExperienceComponent: any;
   
 
   
+
+  }
+  reload(){
+    this.router.navigate(['/experience'])
+    .then(nav => {
+      console.log(nav); // true if navigation is successful
+    }, err => {
+      console.log(err) // when there's an error
+    });
 
   }
 

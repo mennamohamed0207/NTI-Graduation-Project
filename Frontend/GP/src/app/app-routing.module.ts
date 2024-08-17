@@ -8,31 +8,32 @@ import { ProjectsComponent } from './projects/projects.component';
 import { EducationComponent } from './education/education.component';
 
 const routes: Routes = [
+  { path: "", redirectTo: "home", pathMatch: "full" },
   {
-    path:"home",
-    component:HomeComponent
+    path: "home",
+    component: HomeComponent
   },
   {
-    path:"contact",
-    component:ContactComponent
+    path: "contact",
+    component: ContactComponent
   },
   {
-    path:"experience",
-    component:ExperienceComponent
-  },{
-    path:"skills",
-    component:SkillsComponent
-  },{
-    path:"projects",
-    component:ProjectsComponent
-  },{
-    path:"education",
-    component:EducationComponent
+    path: "experience",
+    component: ExperienceComponent
+  }, {
+    path: "skills",
+    component: SkillsComponent
+  }, {
+    path: "projects",
+    component: ProjectsComponent
+  }, {
+    path: "education",
+    component: EducationComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{onSameUrlNavigation:'reload'})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

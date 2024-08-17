@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExperienceService } from '../services/experience.service';
-import { Route } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Route } from '@angular/router';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -12,20 +12,22 @@ import { Location } from '@angular/common';
 export class ExperienceComponent implements OnInit {
 
   timeline :any;
-  constructor(private dataService: ExperienceService,private router: Router) {}
-  // constructor() {}
+  constructor(private dataService: ExperienceService,private route: Router,private window:Location) {
 
-  reloadPage() {
-    this.router.navigate([this.router.url])
-      .then(() => {
-        // window.location.reload();
-      });
+    this.route.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
   }
 
-  // reloadPage() {
-    
-  //   window.location.reload();
-  // }
+
+  //   this.route.events.subscribe((evt) => {
+  //      if (evt instanceof NavigationEnd) {
+  //         // trick the Router into believing it's last link wasn't previously loaded
+  //         this.route.navigated = false;
+  //         // if you need to scroll back to top, here is the right place
+  //         window.go('/experience');
+  //      }
+  //  });
+}
   ngOnInit(): void {
     // this.reloadPage();
     this.dataService.getExperience().subscribe(
@@ -34,5 +36,6 @@ export class ExperienceComponent implements OnInit {
        this.timeline = data.data
       }
     )
+
   }
 }

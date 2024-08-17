@@ -1,34 +1,36 @@
 <div>
     <header class="header" wmAnimate="landing" aos speed="normal">
-        <a  class="logo">
+        <a class="logo">
             <span class="grey-color"> &lt;</span>
             <span class="logo-name">{{greeting.username}}</span>
             <span class="grey-color">/&gt;</span>
         </a>
-        <!-- <input class="menu-btn" type="checkbox" id="menu-btn" /> -->
         <label class="menu-icon" for="menu-btn">
             <span class="navicon"></span>
         </label>
-        <ul class="menu">
-            <li >
-                <a routerLink="/home">About</a>
-            </li>
-            <li>
-                <a [routerLink]="['/experience']" >Experience</a>
-            </li>
-            <li>
-                <a routerLink="/education">Education</a>
-            </li>
-            <li>
-                <a routerLink="/projects">Projects</a>
-            </li>
-            <li>
-                <a routerLink="/skills">Skills</a>
-            </li>
+        <nav>
+            <ul class="menu">
+                <li>
+                    <a routerLink="/home" routerLinkActive="active">About</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/experience']" routerLinkActive="active">Experience</a>
+                </li>
+                <li>
+                    <a routerLink="/education" routerLinkActive="active">Education</a>
+                </li>
+                <li>
+                    <a routerLink="/projects" routerLinkActive="active">Projects</a>
+                </li>
+                <li>
+                    <a routerLink="/skills" routerLinkActive="active">Skills</a>
+                </li>
 
-            <li>
-                <a routerLink="/contact">Contact Me</a>
-            </li>
-        </ul>
+                <li>
+                    <a routerLink="/contact" routerLinkActive="active">Contact Me</a>
+                </li>
+            </ul>
+        </nav>
+
     </header>
 </div>
