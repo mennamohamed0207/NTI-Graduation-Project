@@ -4,6 +4,7 @@
     box-shadow: rgba(0, 0, 0, 0.4) 0px 10px 30px -15px;
     padding: 2rem;
     cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
   }
   .repo-card-div:hover {
     box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px -10px;
@@ -68,6 +69,7 @@
     margin-bottom: 0.75rem;
     font-size: 25px;
     font-weight: 700;
+    font-family: 'Courier New', Courier, monospace;
     letter-spacing: -0.5px;
     overflow: hidden;
     margin: 0px;
@@ -81,6 +83,19 @@
     margin-top: 1rem;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    /* -webkit-line-clamp: 3; */
+    font-family: 'Courier New', Courier, monospace;
     -webkit-box-orient: vertical;
+  }
+  a{
+    list-style: none;
+    text-decoration: none;
+  }
+  .repo-tools{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left:50px ;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
   }
