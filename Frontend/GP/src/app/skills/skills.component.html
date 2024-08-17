@@ -5,9 +5,9 @@
     <div class="skills-grid">
         <div class="skills-item" *ngFor="let i of getCategories()">
             <h3>{{i}}</h3>
-            <Font *ngFor="let j of categorizedSkills[i]">
+            <p *ngFor="let j of categorizedSkills[i]">
                 {{j.name}}
-            </Font>
+            </p>
         </div>
     </div>
 </div>
