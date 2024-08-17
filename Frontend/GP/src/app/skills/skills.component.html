@@ -3,21 +3,11 @@
         <h1 class="timeline-heading" style="font-weight: bolder;">Skills 🚀</h1>
     </div>
     <div class="skills-grid">
-        <div class="skills-item">
-            <h3>Design</h3>
-            <p>UI/UX | Logo | Prototyping</p>
-        </div>
-        <div class="skills-item">
-            <h3>Web Development</h3>
-            <p>Angular | React</p>
-        </div>
-        <div class="skills-item">
-            <h3>Android Development</h3>
-            <p>Jetpack Compose | Architecture Component</p>
-        </div>
-        <div class="skills-item">
-            <h3>Cross Platform Development</h3>
-            <p>Flutter | Jetbrain Compose</p>
+        <div class="skills-item" *ngFor="let i of getCategories()">
+            <h3>{{i}}</h3>
+            <Font *ngFor="let j of categorizedSkills[i]">
+                {{j.name}}
+            </Font>
         </div>
     </div>
 </div>

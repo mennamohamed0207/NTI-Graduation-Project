@@ -33,9 +33,10 @@
     font-size: 1.5em;
   }
   
-  .skills-item p {
+  .skills-item Font {
     margin: 10px 0 0;
     font-size: 1em;
+    padding-left:5px ;
   }
   .timeline-heading {
     text-align: center;

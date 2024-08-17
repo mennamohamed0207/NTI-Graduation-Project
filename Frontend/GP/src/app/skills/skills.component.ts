@@ -27,6 +27,10 @@ export class SkillsComponent {
     { _id: "66b9b7aa7011709774fbebfe", name: "PHP", category: "Programming Languages", __v: 0 }
   ];
 
+  getCategories(): string[] {
+    return Object.keys(this.categorizedSkills);
+  }
+
   ngOnInit(): void {
 this.dataService.getSkills().subscribe(
   (data) => {
@@ -35,7 +39,7 @@ this.dataService.getSkills().subscribe(
 )    
     this.categorizeSkills();
   }
-  categorizedSkills: { [key: string]: Skill[] } = {};
+ public categorizedSkills: { [key: string]: Skill[] } = {};
 
   categorizeSkills(): void {
     this.skills.forEach(skill => {
@@ -43,6 +47,10 @@ this.dataService.getSkills().subscribe(
         this.categorizedSkills[skill.category] = [];
       }
       this.categorizedSkills[skill.category].push(skill);
+      console.log("categ");
+      
+      console.log(this.categorizedSkills[skill.category]);
+      
     });
   }
 }
