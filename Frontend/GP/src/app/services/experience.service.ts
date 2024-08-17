@@ -11,6 +11,7 @@ export class ExperienceService {
   getExperienceUrl = 'http://127.0.0.1:3000/api/v1/exp/';
   getaboutUrl = 'http://127.0.0.1:3000/api/v1/about/';
   getProjectsUrl = 'http://127.0.0.1:3000/api/v1/project/';
+  getContactsUrl='http://127.0.0.1:3000/api/v1/contact/'
   constructor(private http: HttpClient) {
 
   }
@@ -22,5 +23,8 @@ export class ExperienceService {
   }
   getProjects(): Observable<any> {
     return this.http.get(this.getProjectsUrl);
+  }
+  getContacts(): Observable<any> {
+    return this.http.get(this.getContactsUrl);
   }
 }
