@@ -12,6 +12,7 @@ export class ContactComponent {
   public linkedin="mennamohamed0207";
   public facebook="mennamohamed0207";
   public phone="01013222936";
+  public resume="";
   constructor(private dataService: ExperienceService) {}
 
   ngOnInit(): void {
@@ -45,6 +46,9 @@ export class ContactComponent {
           break;
         case 'facebook':
           this.facebook = item.link;
+          break;
+        case 'resume':
+          this.resume = item.link;
           break;
         default:
           break;
