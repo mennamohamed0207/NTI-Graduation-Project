@@ -44,8 +44,7 @@
   }
   
   .contact-subtitle {
-    text-transform: uppercase;
-  }
+font-weight: bolder;  }
   
   .contact-text-div {
     margin-top: 1.5rem;
@@ -88,7 +87,10 @@
   
     .contact-detail,
     .contact-detail-email {
-      font-size: 20px;
+      font-size: 10px;
+    }
+    .contact-detail-email{
+      font-size: 5px;
     }
   
     .contact-image-div {
