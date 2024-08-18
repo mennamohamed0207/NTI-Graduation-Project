@@ -49,4 +49,9 @@ export class ExperienceService {
   editExperience(id:any): Observable<any> {
     return this.http.put(this.updateExperienceUrl + id, id);
   }
+
+  postEducationUrl='http://127.0.0.1:3000/api/v1/edu';
+  addEducation(educationForm: any): Observable<any> {
+    return this.http.post(this.postEducationUrl, educationForm.value);
+  }
 }

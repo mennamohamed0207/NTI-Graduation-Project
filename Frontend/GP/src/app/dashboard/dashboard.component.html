@@ -81,10 +81,49 @@
             <th scope="row">{{i.toDate}}</th>
             <th scope="row">{{i.CumulativeGrade}}</th>
             <th scope="row" *ngIf="!i.githubLink"> </th>
-            <th scope="row"><button class="btn btn-warning" (click)="edit(i._id)">Edit</button></th>
-            <th scope="row"><button class="btn btn-danger" (click)="delete(i._id)">Delete</button></th>
+            <th scope="row"><button class="btn btn-warning" (click)="edit_edu(i._id)">Edit</button></th>
+            <th scope="row"><button class="btn btn-danger" (click)="delete_edu(i._id)">Delete</button></th>
 
         </tr>
 
     </tbody>
 </table>
+
+<form [formGroup]="educationForm" (ngSubmit)="onSubmit_edu()">
+    <div class="form-group">
+        <label for="college">{{fieldOfEducation[0]|titlecase}}</label>
+        <input type="text" class="form-control" id="college" placeholder="Enter college" formControlName="college">
+    </div>
+    <div class="form-group">
+        <label for="department">{{fieldOfEducation[1]|titlecase}}</label>
+        <input type="text" class="form-control" id="department" placeholder="Enter department"
+            formControlName="department">
+    </div>
+    <div class="form-group">
+        <label for="fromDate">{{fieldOfEducation[4]|titlecase}}</label>
+        <input type="text" class="form-control" id="fromDate" placeholder="Enter start date "
+            formControlName="fromDate">
+    </div>
+    <div class="form-group">
+        <label for="toDate">{{fieldOfEducation[5]|titlecase}}</label>
+        <input type="text" class="form-control" id="toDate" placeholder="Enter end date" formControlName="toDate">
+    </div>
+
+    <div class="form-group">
+        <label for="university">{{fieldOfEducation[2]|titlecase}}</label>
+        <input type="text" class="form-control" id="university" placeholder="Enter university"
+            formControlName="university">
+    </div>
+    <div class="form-group">
+        <label for="degree">{{fieldOfEducation[3]|titlecase}}</label>
+        <input type="text" class="form-control" id="degree" placeholder="Enter degree" formControlName="degree">
+    </div>
+
+    <div class="form-group">
+        <label for="CumulativeGrade">{{fieldOfEducation[6]|titlecase}}</label>
+        <input type="text" class="form-control" id="CumulativeGrade" placeholder="Enter cumulative grade"
+            formControlName="CumulativeGrade">
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+</form>
