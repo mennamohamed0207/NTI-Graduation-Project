@@ -105,6 +105,13 @@ export class DashboardComponent {
     });
   }
   delete_edu(id: string) {
+    this.dataService.deleteEducation(id).subscribe((data) => {
+      const index=this.educations.findIndex((edu:any)=>edu._id===id);
+
+      if(index!==-1){
+        this.educations.splice(index,1);
+      }
+    })
   }
 
   ngOnInit(): void {

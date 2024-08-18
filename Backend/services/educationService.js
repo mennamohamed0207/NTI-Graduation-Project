@@ -22,10 +22,11 @@ exports.getEducaiton = async (req, res) => {
 
 exports.deleteEducation = async (req, res) => {
   try {
-    const data = await eduMode.deleteOne({ title: req.params.title });
+    const deleted=await eduMode.find({id:req.params.id})
+    const data = await eduMode.deleteOne({ id: req.params.id });
     return res
       .status(200)
-      .json({ message: "education deleted successfully", education: data });
+      .json({ message: "education deleted successfully", education: deleted });
   } catch (err) {
     console.log(err);
   }
@@ -33,13 +34,14 @@ exports.deleteEducation = async (req, res) => {
 
 exports.updateEducation = async (req, res) => {
   try {
+    const updated=await eduMode.find({id:req.params.id})
     const data = await eduMode.updateOne(
-      { title: req.params.title },
+      { id: req.params.id },
       { $set: req.body }
     );
     res
       .status(200)
-      .json({ message: "education updated successfully", data: data });
+      .json({ message: "education updated successfully", education: updated });
   } catch (err) {
     console.log(err);
   }

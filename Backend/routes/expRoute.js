@@ -6,7 +6,7 @@ const router=express.Router();
 
 router.post("/",createExperience);
 router.get("/",getExperience);
-router.delete("/:title",deleteExperience);
-router.put("/:title",updateExperience);
+router.delete("/:id",deleteExperience);
+router.put("/:id",updateExperience);
 
 module.exports=router;

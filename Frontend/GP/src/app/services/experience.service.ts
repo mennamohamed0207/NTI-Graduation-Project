@@ -51,7 +51,15 @@ export class ExperienceService {
   }
 
   postEducationUrl='http://127.0.0.1:3000/api/v1/edu';
+  deleteEducationUrl='http://127.0.0.1:3000/api/v1/edu/';
+  updateEducationUrl='http://127.0.0.1:3000/api/v1/edu/';
   addEducation(educationForm: any): Observable<any> {
     return this.http.post(this.postEducationUrl, educationForm.value);
+  }
+  deleteEducation(id: any): Observable<any> {
+    return this.http.delete(this.deleteEducationUrl + id);
+  }
+  editEducation(id:any): Observable<any> {
+    return this.http.put(this.updateEducationUrl + id, id);
   }
 }

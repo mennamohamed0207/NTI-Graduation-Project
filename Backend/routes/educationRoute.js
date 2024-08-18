@@ -4,7 +4,7 @@ const router=express.Router();
 
 router.post("/",createEducation);
 router.get("/",getEducaiton);
-router.delete("delete/:degree",deleteEducation);
-router.put("/:degree",updateEducation);
+router.delete("/:id",deleteEducation);
+router.put("/:id",updateEducation);
 
 module.exports=router
