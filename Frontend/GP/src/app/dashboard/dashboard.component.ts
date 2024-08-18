@@ -87,6 +87,20 @@ export class DashboardComponent {
     });
   }
   edit_edu(id: string) {
+    const index=this.educations.findIndex((edu:any)=>edu._id===id);
+
+    this.educationForm.get('college')?.setValue(this.educations[index].college);
+    this.educationForm.get('department')?.setValue(this.educations[index].department);
+    this.educationForm.get('fromDate')?.setValue(this.educations[index].fromDate);
+    this.educationForm.get('toDate')?.setValue(this.educations[index].toDate);
+    this.educationForm.get('university')?.setValue(this.educations[index].university);
+    this.educationForm.get('degree')?.setValue(this.educations[index].degree);
+    this.educationForm.get('CumulativeGrade')?.setValue(this.educations[index].CumulativeGrade);
+    if(index!==-1){
+      this.dataService.editEducation(id).subscribe((data)=>{
+        this.delete_edu(id);
+      })
+    }
 
   }
   delete(id: string) {
