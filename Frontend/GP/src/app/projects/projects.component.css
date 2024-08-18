@@ -12,8 +12,11 @@
 }
 .project-title {
   font-size: 52px;
-  font-weight: 400;
+  font-weight: bolder;
   line-height: normal;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+
 }
 
 .startup-project-text img{
