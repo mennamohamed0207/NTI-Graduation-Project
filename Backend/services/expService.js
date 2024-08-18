@@ -21,10 +21,11 @@ exports.getExperience = async (req, res) => {
 
 exports.deleteExperience = async (req, res) => {
   try {
+    const deleted = await expModel.find({ id: req.params.id });
     const data = await expModel.deleteOne({ id: req.params.id });
     return res
       .status(200)
-      .json({ message: "experience deleted successfully", experience: data });
+      .json({ message: "experience deleted successfully", experience: deleted });
   } catch (err) {
     console.log(err);
   }

@@ -1,60 +1,62 @@
+<h1>Experience</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col" *ngFor="let i of fieldOfExperience">{{i}}</th>
 
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of experiences">
+            <th scope="row">{{i.title}}</th>
+            <th scope="row">{{i.org}}</th>
+            <th scope="row">{{i.fromDate}}</th>
+            <th scope="row">{{i.toDate}}</th>
+            <th scope="row">{{i.description}}</th>
+            <th scope="row">{{i.tools}}</th>
+            <th scope="row" *ngIf="i.githubLink"><a href={{i.githubLink}}><button class="btn btn-primary">Github
+                        repo</button></a></th>
+            <th scope="row" *ngIf="!i.githubLink"> </th>
+            <th scope="row"><button class="btn btn-warning">Edit</button></th>
+            <th scope="row"><button class="btn btn-danger" (click)="delete(i._id)">Delete</button></th>
 
-    <h1>Experience</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col" *ngFor="let i of fieldOfExperience">{{i}}</th>
+        </tr>
 
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let i of experiences" >
-                <th scope="row">{{i.title}}</th>
-                <th scope="row">{{i.org}}</th>
-                <th scope="row">{{i.fromDate}}</th>
-                <th scope="row">{{i.toDate}}</th>
-                <th scope="row">{{i.description}}</th>
-                <th scope="row">{{i.tools}}</th>
-                <th scope="row" *ngIf="i.githubLink"><a href={{i.githubLink}}><button class="btn btn-primary">Github repo</button></a></th>
-                <th scope="row" *ngIf="!i.githubLink"> </th>
-                <th scope="row"><button class="btn btn-warning">Edit</button></th>
-                <th scope="row"><button class="btn btn-danger">Delete</button></th>
-
-            </tr>
-
-        </tbody>
-    </table>
-    <form [formGroup]="experienceForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="title">{{fieldOfExperience[0]|titlecase}}</label>
-            <input type="text" class="form-control" id="title" placeholder="Enter title" formControlName="title">
-        </div>
-        <div class="form-group">
-            <label for="org">{{fieldOfExperience[1]|titlecase}}</label>
-            <input type="text" class="form-control" id="org" placeholder="Enter Organization" formControlName="org">
-        </div>
-        <div class="form-group">
-            <label for="fromDate">{{fieldOfExperience[2]|titlecase}}</label>
-            <input type="text" class="form-control" id="fromDate" placeholder="Enter start date " formControlName="fromDate">
-        </div>
-        <div class="form-group">
-            <label for="toDate">{{fieldOfExperience[3]|titlecase}}</label>
-            <input type="text" class="form-control" id="toDate" placeholder="Enter end date" formControlName="toDate">
-        </div>
-        <div class="form-group">
-            <label for="description">{{fieldOfExperience[4]|titlecase}}</label>
-            <input type="text" class="form-control" id="description" placeholder="Enter description separated by comma" formControlName="description">
-        </div>
-        <div class="form-group">
-            <label for="tools">{{fieldOfExperience[5]|titlecase}}</label>
-            <input type="text" class="form-control" id="tools" placeholder="Enter tools used separated by comma" formControlName="tools">
-        </div>
-        <div class="form-group">
-            <label for="githubLink">{{fieldOfExperience[6]|titlecase}}</label>
-            <input type="text" class="form-control" id="githubLink" placeholder="Enter github link" formControlName="githubLink">
-        </div>
-        <br />
-        <button type="submit" class="btn btn-primary btn-block">Submit</button>
-    </form>
-
+    </tbody>
+</table>
+<form [formGroup]="experienceForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="title">{{fieldOfExperience[0]|titlecase}}</label>
+        <input type="text" class="form-control" id="title" placeholder="Enter title" formControlName="title">
+    </div>
+    <div class="form-group">
+        <label for="org">{{fieldOfExperience[1]|titlecase}}</label>
+        <input type="text" class="form-control" id="org" placeholder="Enter Organization" formControlName="org">
+    </div>
+    <div class="form-group">
+        <label for="fromDate">{{fieldOfExperience[2]|titlecase}}</label>
+        <input type="text" class="form-control" id="fromDate" placeholder="Enter start date "
+            formControlName="fromDate">
+    </div>
+    <div class="form-group">
+        <label for="toDate">{{fieldOfExperience[3]|titlecase}}</label>
+        <input type="text" class="form-control" id="toDate" placeholder="Enter end date" formControlName="toDate">
+    </div>
+    <div class="form-group">
+        <label for="description">{{fieldOfExperience[4]|titlecase}}</label>
+        <input type="text" class="form-control" id="description" placeholder="Enter description separated by comma"
+            formControlName="description">
+    </div>
+    <div class="form-group">
+        <label for="tools">{{fieldOfExperience[5]|titlecase}}</label>
+        <input type="text" class="form-control" id="tools" placeholder="Enter tools used separated by comma"
+            formControlName="tools">
+    </div>
+    <div class="form-group">
+        <label for="githubLink">{{fieldOfExperience[6]|titlecase}}</label>
+        <input type="text" class="form-control" id="githubLink" placeholder="Enter github link"
+            formControlName="githubLink">
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+</form>

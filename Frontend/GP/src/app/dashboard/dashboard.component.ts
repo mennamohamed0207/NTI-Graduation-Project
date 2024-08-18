@@ -9,29 +9,53 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
-  experienceForm!:FormGroup;
-  experiences: any;
-  fieldOfExperience: any = [];
+  experienceForm!: FormGroup;
+  experiences: any = [];
+  fieldOfExperience = ['title', 'org', 'fromDate', 'toDate', 'description', 'tools', 'githubLink'];
   private subscription: Subscription | undefined;
-  constructor(private dataService: ExperienceService) {}
+  constructor(private dataService: ExperienceService) { }
 
   loadExperience(): void {
     this.dataService.getExperience().subscribe((data) => {
-      this.experiences = data.data;
-      this.getKeys();
+      if (data) {
+        this.experiences = data.data;
+        this.getKeys();
+      }
+      else {
+        this.experiences = [];
+        this.fieldOfExperience = ['title', 'org', 'fromDate', 'toDate', 'description', 'tools', 'githubLink'];
+      }
     });
   }
   getKeys() {
-    this.fieldOfExperience = Object.keys(this.experiences[1]);
-    this.fieldOfExperience.splice(6, 1); //deleting _id
-    this.fieldOfExperience.splice(0, 1); //deleting _id
-    this.fieldOfExperience.splice(this.fieldOfExperience.length - 1, 1); //deleting _v
-    // console.log(this.fieldOfExperience);
-  }
+    if (this.experiences.length > 1) {
+      this.fieldOfExperience = Object.keys(this.experiences[1]);
+      this.fieldOfExperience.splice(6, 1); //deleting _id
+      this.fieldOfExperience.splice(0, 1); //deleting _id
+      this.fieldOfExperience.splice(this.fieldOfExperience.length - 1, 1); //deleting _v
+      // console.log(this.fieldOfExperience);
+    }
 
+  }
+  delete(id: string) {
+    console.log(id);
+  
+    this.dataService.deleteExperience(id).subscribe((data) => {
+      console.log(data);
+  
+      // Find the index of the experience with the matching id
+      const index = this.experiences.findIndex((exp: any) => exp._id === id);
+  
+      // Only splice if the index is found
+      if (index !== -1) {
+        this.experiences.splice(index, 1);
+      }
+    });
+  }
+  
   ngOnInit(): void {
     this.loadExperience();
-    this.experienceForm=new FormGroup({
+    this.experienceForm = new FormGroup({
       title: new FormControl(null, [Validators.required]),
       org: new FormControl(null, [Validators.required]),
       fromDate: new FormControl(null, [Validators.required]),
@@ -41,8 +65,8 @@ export class DashboardComponent {
       githubLink: new FormControl(null),
     })
   }
-  onSubmit()
-  {
+
+  onSubmit() {
     // console.log(this.experienceForm.value);
     // this.dataService.addExperience(this.experienceForm).subscribe();
     // this.loadExperience();
@@ -50,7 +74,7 @@ export class DashboardComponent {
       this.dataService.addExperience(this.experienceForm).subscribe((newExperience) => {
         // Assuming the API returns the newly added experience
         this.experiences.push(newExperience.experience);
-        // this.experienceForm.reset(); // Optional: reset the form after submission
+        this.experienceForm.reset(); // Optional: reset the form after submission
       });
     }
   }
