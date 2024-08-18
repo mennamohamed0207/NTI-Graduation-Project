@@ -114,6 +114,7 @@ export class DashboardComponent {
 
       // Only splice if the index is found
       if (index !== -1) {
+        
         this.experiences.splice(index, 1);
       }
     });
