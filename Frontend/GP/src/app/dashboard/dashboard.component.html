@@ -16,6 +16,8 @@
                 <th scope="row">{{i.toDate}}</th>
                 <th scope="row">{{i.description}}</th>
                 <th scope="row">{{i.tools}}</th>
+                <th scope="row" *ngIf="i.githubLink"><a href={{i.githubLink}}><button class="btn btn-primary">Github repo</button></a></th>
+                <th scope="row" *ngIf="!i.githubLink"> </th>
                 <th scope="row"><button class="btn btn-warning">Edit</button></th>
                 <th scope="row"><button class="btn btn-danger">Delete</button></th>
 
@@ -47,6 +49,10 @@
         <div class="form-group">
             <label for="tools">{{fieldOfExperience[5]|titlecase}}</label>
             <input type="text" class="form-control" id="tools" placeholder="Enter tools used separated by comma" formControlName="tools">
+        </div>
+        <div class="form-group">
+            <label for="githubLink">{{fieldOfExperience[6]|titlecase}}</label>
+            <input type="text" class="form-control" id="githubLink" placeholder="Enter github link" formControlName="githubLink">
         </div>
         <br />
         <button type="submit" class="btn btn-primary btn-block">Submit</button>

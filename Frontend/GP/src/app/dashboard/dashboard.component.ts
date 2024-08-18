@@ -22,10 +22,11 @@ export class DashboardComponent {
     });
   }
   getKeys() {
-    this.fieldOfExperience = Object.keys(this.experiences[0]);
-    this.fieldOfExperience.splice(1, 1); //deleting _id
+    this.fieldOfExperience = Object.keys(this.experiences[1]);
+    this.fieldOfExperience.splice(6, 1); //deleting _id
     this.fieldOfExperience.splice(0, 1); //deleting _id
     this.fieldOfExperience.splice(this.fieldOfExperience.length - 1, 1); //deleting _v
+    // console.log(this.fieldOfExperience);
   }
 
   ngOnInit(): void {
@@ -37,6 +38,7 @@ export class DashboardComponent {
       toDate: new FormControl(null, [Validators.required]),
       description: new FormControl(null, [Validators.required]),
       tools: new FormControl(null, [Validators.required]),
+      githubLink: new FormControl(null),
     })
   }
   onSubmit()
