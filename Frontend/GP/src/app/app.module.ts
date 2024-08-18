@@ -17,6 +17,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { HttpLink, InMemoryCache } from '@apollo/client';
 import { GithubCalenderComponent } from './github-calender/github-calender.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -30,13 +33,16 @@ import { GithubCalenderComponent } from './github-calender/github-calender.compo
     EducationComponent,
     FooterComponent,
     GithubCardComponent,
-    GithubCalenderComponent],
+    GithubCalenderComponent,
+    DashboardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule,   // Required for Apollo Client to work with HTTP
+    HttpClientModule,   
     ApolloModule,
+    FormsModule,
+    ReactiveFormsModule 
   
   ],
   providers: [

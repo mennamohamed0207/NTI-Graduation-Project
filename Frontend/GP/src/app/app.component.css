@@ -158,3 +158,8 @@ p {
     font-size: 12px;
   }
 }
+
+.dashboard{
+  margin:10px;
+  padding:10px;
+}
