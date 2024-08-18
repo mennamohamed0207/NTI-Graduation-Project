@@ -12,7 +12,8 @@ export class ExperienceService {
   getaboutUrl = 'http://127.0.0.1:3000/api/v1/about/';
   getProjectsUrl = 'http://127.0.0.1:3000/api/v1/project/';
   getContactsUrl='http://127.0.0.1:3000/api/v1/contact/';
-  getSkillsUrl='http://127.0.0.1:3000/api/v1/skills/'
+  getSkillsUrl='http://127.0.0.1:3000/api/v1/skills/';
+  getEducationUrl='http://127.0.0.1:3000/api/v1/edu/';
   constructor(private http: HttpClient) {
 
   }
@@ -30,5 +31,8 @@ export class ExperienceService {
   }
   getSkills(): Observable<any> {
     return this.http.get(this.getSkillsUrl);
+  }
+  getEducation(): Observable<any> {
+    return this.http.get(this.getEducationUrl);
   }
 }
