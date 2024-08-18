@@ -32,13 +32,15 @@ exports.deleteExperience = async (req, res) => {
 };
 exports.updateExperience = async (req, res) => {
   try {
+    
     const data = await expModel.updateOne(
-      { title: req.params.title },
+      { id: req.params.id},
       { $set: req.body }
     );
+    const afterUpdate=await expModel.find({id:req.params.id})
     return res
       .status(200)
-      .json({ message: "experience updated successfully", experience: data });
+      .json({ message: "experience updated successfully", experience: afterUpdate });
   } catch (err) {
     console.log(err);
   }

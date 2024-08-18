@@ -38,11 +38,15 @@ export class ExperienceService {
 
   postExperienceUrl='http://127.0.0.1:3000/api/v1/exp';
   deleteExperienceUrl='http://127.0.0.1:3000/api/v1/exp/';
+  updateExperienceUrl='http://127.0.0.1:3000/api/v1/exp/';
 
   addExperience(experienceForm: any): Observable<any> {
     return this.http.post(this.postExperienceUrl, experienceForm.value);
   }
   deleteExperience(id: any): Observable<any> {
     return this.http.delete(this.deleteExperienceUrl + id);
+  }
+  editExperience(id:any): Observable<any> {
+    return this.http.put(this.updateExperienceUrl + id, id);
   }
 }

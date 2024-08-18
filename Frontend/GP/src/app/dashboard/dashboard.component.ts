@@ -37,6 +37,28 @@ export class DashboardComponent {
     }
 
   }
+  edit(id: string) {
+    const index = this.experiences.findIndex((exp: any) => exp._id === id);
+    this.experienceForm.get('title')?.setValue(this.experiences[index].title);
+    this.experienceForm.get('org')?.setValue(this.experiences[index].org);
+    this.experienceForm.get('fromDate')?.setValue(this.experiences[index].fromDate);
+    this.experienceForm.get('toDate')?.setValue(this.experiences[index].toDate);
+    this.experienceForm.get('description')?.setValue(this.experiences[index].description);
+    this.experienceForm.get('tools')?.setValue(this.experiences[index].tools);
+    this.experienceForm.get('githubLink')?.setValue(this.experiences[index].githubLink);
+    this.dataService.editExperience(id).subscribe((data) => {
+      console.log(data);
+
+  
+      // Find the index of the experience with the matching id
+      const index = this.experiences.findIndex((exp: any) => exp._id === id);
+  
+      // Only splice if the index is found
+      if (index !== -1) {
+        this.delete(id);
+      }
+    });
+  }
   delete(id: string) {
     console.log(id);
   

@@ -17,7 +17,7 @@
             <th scope="row" *ngIf="i.githubLink"><a href={{i.githubLink}}><button class="btn btn-primary">Github
                         repo</button></a></th>
             <th scope="row" *ngIf="!i.githubLink"> </th>
-            <th scope="row"><button class="btn btn-warning">Edit</button></th>
+            <th scope="row"><button class="btn btn-warning" (click)="edit(i._id)">Edit</button></th>
             <th scope="row"><button class="btn btn-danger" (click)="delete(i._id)">Delete</button></th>
 
         </tr>
