@@ -60,3 +60,31 @@
     <br />
     <button type="submit" class="btn btn-primary btn-block">Submit</button>
 </form>
+
+<hr />
+
+<h1>Education</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col" *ngFor="let i of fieldOfEducation">{{i}}</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of educations">
+            <th scope="row">{{i.college}}</th>
+            <th scope="row">{{i.department}}</th>
+            <th scope="row">{{i.university}}</th>
+            <th scope="row">{{i.degree}}</th>
+            <th scope="row">{{i.fromDate}}</th>
+            <th scope="row">{{i.toDate}}</th>
+            <th scope="row">{{i.CumulativeGrade}}</th>
+            <th scope="row" *ngIf="!i.githubLink"> </th>
+            <th scope="row"><button class="btn btn-warning" (click)="edit(i._id)">Edit</button></th>
+            <th scope="row"><button class="btn btn-danger" (click)="delete(i._id)">Delete</button></th>
+
+        </tr>
+
+    </tbody>
+</table>

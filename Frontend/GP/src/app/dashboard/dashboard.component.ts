@@ -9,9 +9,17 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
+  //Forms
   experienceForm!: FormGroup;
+  educationForm!: FormGroup;
+  //Data
   experiences: any = [];
+  educations: any = [];
+  //Fields
   fieldOfExperience = ['title', 'org', 'fromDate', 'toDate', 'description', 'tools', 'githubLink'];
+  fieldOfEducation = ['college', 'department','university','degree', 'fromDate', 'toDate', 'cumulativeGrade'];
+
+
   private subscription: Subscription | undefined;
   constructor(private dataService: ExperienceService) { }
 
@@ -26,6 +34,26 @@ export class DashboardComponent {
         this.fieldOfExperience = ['title', 'org', 'fromDate', 'toDate', 'description', 'tools', 'githubLink'];
       }
     });
+  }
+  loadEducation(): void {
+    this.dataService.getEducation().subscribe((data) => {
+      if (data) {
+        this.educations = data.data;
+        this.getKeys_education();
+      }
+      else {
+        this.educations = [];
+      }
+    });
+  }
+  getKeys_education() {
+    if (this.educations.length > 1) {
+      this.fieldOfEducation = Object.keys(this.educations[1]);
+      this.fieldOfEducation.splice(6, 1); //deleting _id
+      this.fieldOfEducation.splice(0, 1); //deleting _id
+      this.fieldOfEducation.splice(this.fieldOfEducation.length - 1, 1); //deleting _v
+      // console.log(this.fieldOfEducation);
+    }
   }
   getKeys() {
     if (this.experiences.length > 1) {
@@ -77,6 +105,7 @@ export class DashboardComponent {
   
   ngOnInit(): void {
     this.loadExperience();
+    this.loadEducation();
     this.experienceForm = new FormGroup({
       title: new FormControl(null, [Validators.required]),
       org: new FormControl(null, [Validators.required]),
