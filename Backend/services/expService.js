@@ -2,6 +2,10 @@ const expModel = require("../models/experienceModel");
 
 exports.createExperience = async (req, res) => {
   try {
+    //separting tools and description in elements and make them array 
+    const { tools, description } = req.body;
+    req.body.description = description.split(",");
+    req.body.tools = tools.split(",");
     const exp = await expModel.create(req.body);
     return res
       .status(200)
