@@ -123,7 +123,15 @@ export class DashboardComponent {
 
   }
   editSkill(id:string){
-    
+    const index=this.skills.findIndex((edu: any) => edu._id === id);
+
+    this.skillsForm.get('name')?.setValue(this.skills[index].name);
+    this.skillsForm.get('category')?.setValue(this.skills[index].category);
+    if (index !== -1) {
+      this.dataService.editSkill(id).subscribe((data) => {
+        this.deleteSkill(id);
+      })
+    }
   }
   delete(id: string) {
     console.log(id);

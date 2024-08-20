@@ -74,4 +74,7 @@ export class ExperienceService {
   addSkill(skillForm: any): Observable<any> {
     return this.http.post(this.addSkillUrl, skillForm.value);
   }
+  editSkill(id:string):Observable<any>{
+    return this.http.put(this.updateSkillUrl+id,id)
+  }
 }
