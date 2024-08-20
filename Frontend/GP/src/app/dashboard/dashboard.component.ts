@@ -13,6 +13,7 @@ export class DashboardComponent {
   experienceForm!: FormGroup;
   educationForm!: FormGroup;
   skillsForm!: FormGroup;
+  contactForm!: FormGroup;
   //Data
   experiences: any = [];
   educations: any = [];
@@ -22,7 +23,8 @@ export class DashboardComponent {
   fieldOfExperience = ['title', 'org', 'fromDate', 'toDate', 'description', 'tools', 'githubLink'];
   fieldOfEducation = ['college', 'department', 'university', 'degree', 'fromDate', 'toDate', 'cumulativeGrade'];
   fieldsOfSkills = ['skill', 'category'];
-  fieldsOfContact = ['name', 'link']
+  fieldsOfContact = ['name', 'link'];
+  
 
 
   private subscription: Subscription | undefined;
@@ -227,6 +229,10 @@ export class DashboardComponent {
     this.skillsForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       category: new FormControl(null, [Validators.required]),
+    });
+    this.contactForm=new FormGroup({
+      name: new FormControl(null, [Validators.required]),
+      link: new FormControl(null, [Validators.required]),
     })
   }
 
@@ -252,6 +258,12 @@ export class DashboardComponent {
     this.dataService.addSkill(this.skillsForm).subscribe((newSkill) => {
       this.skills.push(newSkill.skill);
       this.skillsForm.reset();
+    })
+  }
+  onSubmitContact(){
+    this.dataService.addContact(this.contactForm).subscribe((newContact) => {
+      this.contact.push(newContact.data);
+      this.contactForm.reset();
     })
   }
 }
