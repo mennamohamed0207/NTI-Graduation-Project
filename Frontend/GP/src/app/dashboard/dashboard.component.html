@@ -154,9 +154,29 @@
     </div>
     <div class="form-group">
         <label for="category">{{fieldsOfSkills[1]|titlecase}}</label>
-        <input type="text" class="form-control" id="category" placeholder="Enter category"
-            formControlName="category">
+        <input type="text" class="form-control" id="category" placeholder="Enter category" formControlName="category">
     </div>
     <br />
     <button type="submit" class="btn btn-primary btn-block">Submit</button>
 </form>
+
+<hr />
+<h1>Contact</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col" *ngFor="let i of fieldsOfContact">{{i}}</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of contact">
+            <th scope="row">{{i.name}}</th>
+            <th scope="row">{{i.link}}</th>
+            <th scope="row"><button class="btn btn-warning" (click)="editContact(i._id)">Edit</button></th>
+            <th scope="row"><button class="btn btn-danger" (click)="deleteContact(i._id)">Delete</button></th>
+
+        </tr>
+
+    </tbody>
+</table>

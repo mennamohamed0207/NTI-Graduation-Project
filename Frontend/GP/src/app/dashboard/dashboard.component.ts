@@ -17,10 +17,12 @@ export class DashboardComponent {
   experiences: any = [];
   educations: any = [];
   skills: any = [];
+  contact: any = [];
   //Fields
   fieldOfExperience = ['title', 'org', 'fromDate', 'toDate', 'description', 'tools', 'githubLink'];
   fieldOfEducation = ['college', 'department', 'university', 'degree', 'fromDate', 'toDate', 'cumulativeGrade'];
   fieldsOfSkills = ['skill', 'category'];
+  fieldsOfContact = ['name', 'link']
 
 
   private subscription: Subscription | undefined;
@@ -58,6 +60,17 @@ export class DashboardComponent {
       }
     })
   }
+  loadContacts(): void {
+    this.dataService.getContacts().subscribe((data) => {
+      if (data) {
+        this.contact = data.data;
+        this.getKeysContact();
+      }
+      else {
+        this.contact = [];
+      }
+    })
+  }
   getKeys_education() {
     if (this.educations.length > 1) {
       this.fieldOfEducation = Object.keys(this.educations[1]);
@@ -77,10 +90,17 @@ export class DashboardComponent {
 
   }
   getKeys_skills() {
-    if(this.skills.length > 1){
+    if (this.skills.length > 1) {
       this.fieldsOfSkills = Object.keys(this.skills[1]);
       this.fieldsOfSkills.splice(0, 1); //deleting _id
       this.fieldsOfSkills.splice(this.fieldsOfSkills.length - 1, 1); //deleting _v
+    }
+  }
+  getKeysContact() {
+    if (this.contact.length > 1) {
+      this.fieldsOfContact = Object.keys(this.contact[1]);
+      this.fieldsOfContact.splice(0, 1); //deleting _id
+      this.fieldsOfContact.splice(this.fieldsOfContact.length - 1, 1); //deleting _v
     }
   }
   edit(id: string) {
@@ -122,8 +142,8 @@ export class DashboardComponent {
     }
 
   }
-  editSkill(id:string){
-    const index=this.skills.findIndex((edu: any) => edu._id === id);
+  editSkill(id: string) {
+    const index = this.skills.findIndex((edu: any) => edu._id === id);
 
     this.skillsForm.get('name')?.setValue(this.skills[index].name);
     this.skillsForm.get('category')?.setValue(this.skills[index].category);
@@ -132,6 +152,9 @@ export class DashboardComponent {
         this.deleteSkill(id);
       })
     }
+  }
+  editContact(id: string) {
+
   }
   delete(id: string) {
     console.log(id);
@@ -158,8 +181,8 @@ export class DashboardComponent {
       }
     })
   }
-  deleteSkill(id:string){
-    this.dataService.deleteSkill(id).subscribe((data)=>{
+  deleteSkill(id: string) {
+    this.dataService.deleteSkill(id).subscribe((data) => {
       const index = this.skills.findIndex((edu: any) => edu._id === id);
 
       if (index !== -1) {
@@ -167,11 +190,22 @@ export class DashboardComponent {
       }
     })
   }
+  deleteContact(id: string) {
+    this.dataService.deleteContact(id).subscribe((data) => {
+      const index = this.contact.findIndex((contact: any) => contact._id === id);
+      if (index !== -1) {
+        this.contact.splice(index, 1);
+      }
+
+    })
+  }
+
 
   ngOnInit(): void {
     this.loadExperience();
     this.loadEducation();
     this.loadSkills();
+    this.loadContacts();
     this.experienceForm = new FormGroup({
       title: new FormControl(null, [Validators.required]),
       org: new FormControl(null, [Validators.required]),
@@ -191,8 +225,8 @@ export class DashboardComponent {
       CumulativeGrade: new FormControl(null, [Validators.required])
     });
     this.skillsForm = new FormGroup({
-      name:new FormControl(null, [Validators.required]),
-      category:new FormControl(null, [Validators.required]),
+      name: new FormControl(null, [Validators.required]),
+      category: new FormControl(null, [Validators.required]),
     })
   }
 
@@ -214,8 +248,8 @@ export class DashboardComponent {
       this.educationForm.reset(); // Optional: reset the form after submission
     })
   }
-  onSubmitSkill(){
-    this.dataService.addSkill(this.skillsForm).subscribe((newSkill)=>{
+  onSubmitSkill() {
+    this.dataService.addSkill(this.skillsForm).subscribe((newSkill) => {
       this.skills.push(newSkill.skill);
       this.skillsForm.reset();
     })

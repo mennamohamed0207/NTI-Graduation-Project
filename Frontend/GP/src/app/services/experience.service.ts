@@ -77,4 +77,16 @@ export class ExperienceService {
   editSkill(id:string):Observable<any>{
     return this.http.put(this.updateSkillUrl+id,id)
   }
+  deleteContactUrl='http://127.0.0.1:3000/api/v1/contact/'
+  editContactUrl='http://127.0.0.1:3000/api/v1/contact/'
+  addContactUrl='http://127.0.0.1:3000/api/v1/contact/'
+  deleteContact(id:string):Observable<any>{
+    return this.http.delete(this.deleteContactUrl+id)
+  }
+  editContact(id:string):Observable<any>{
+    return this.http.put(this.editContactUrl+id,id)
+  }
+  addContact(contactForm:any):Observable<any>{
+    return this.http.post(this.addContactUrl,contactForm.value)
+  }
 }
