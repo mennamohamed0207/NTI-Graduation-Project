@@ -8,7 +8,7 @@ const skill=mongoose.Schema({
     category:{
         required:true,
         type:String,
-        enum: ["Backend", "Frontend", "Programming Languages"]
+        // enum: ["Backend", "Frontend", "Programming Languages"]
     }
 })
 const skillModel= mongoose.model("skills",skill);

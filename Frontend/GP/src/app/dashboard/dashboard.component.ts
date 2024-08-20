@@ -12,6 +12,7 @@ export class DashboardComponent {
   //Forms
   experienceForm!: FormGroup;
   educationForm!: FormGroup;
+  skillsForm!: FormGroup;
   //Data
   experiences: any = [];
   educations: any = [];
@@ -33,7 +34,6 @@ export class DashboardComponent {
       }
       else {
         this.experiences = [];
-        this.fieldOfExperience = ['title', 'org', 'fromDate', 'toDate', 'description', 'tools', 'githubLink'];
       }
     });
   }
@@ -181,6 +181,10 @@ export class DashboardComponent {
       university: new FormControl(null, [Validators.required]),
       degree: new FormControl(null, [Validators.required]),
       CumulativeGrade: new FormControl(null, [Validators.required])
+    });
+    this.skillsForm = new FormGroup({
+      name:new FormControl(null, [Validators.required]),
+      category:new FormControl(null, [Validators.required]),
     })
   }
 
@@ -202,5 +206,10 @@ export class DashboardComponent {
       this.educationForm.reset(); // Optional: reset the form after submission
     })
   }
-  // }
+  onSubmitSkill(){
+    this.dataService.addSkill(this.skillsForm).subscribe((newSkill)=>{
+      this.skills.push(newSkill.skill);
+      this.skillsForm.reset();
+    })
+  }
 }

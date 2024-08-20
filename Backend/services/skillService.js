@@ -5,7 +5,7 @@ const skillModel=require('../models/skillModel');
 exports.createSkill=async(req,res)=> {
     try {
       const data = await skillModel.create(req.body);
-      res.status(200).json({ message: "skill added successfully", data: data });
+      res.status(200).json({ message: "skill added successfully", skill: data });
     } catch (error) {
       res.status(500).json({ message: "something went wrong", error: error });
     }
