@@ -2,9 +2,14 @@ const expModel = require("../models/experienceModel");
 
 exports.createExperience = async (req, res) => {
   try {
-    //separting tools and description in elements and make them array 
+    //separting tools and description in elements and make them array
     const { tools, description } = req.body;
+    console.log(req.body);
+    //convert array to string
+    // req.body.tools = tools.join(",");
+    // req.body.description = description.join(",");
     req.body.description = description.split(",");
+    
     req.body.tools = tools.split(",");
     const exp = await expModel.create(req.body);
     return res
@@ -29,22 +34,31 @@ exports.deleteExperience = async (req, res) => {
     const data = await expModel.deleteOne({ _id: req.params.id });
     return res
       .status(200)
-      .json({ message: "experience deleted successfully", experience: deleted });
+      .json({
+        message: "experience deleted successfully",
+        experience: deleted,
+      });
   } catch (err) {
     console.log(err);
   }
 };
 exports.updateExperience = async (req, res) => {
   try {
-    
+    const { tools, description } = req.body;
+    req.body.description = description.split(",");
+    req.body.tools = tools.split(",");
     const data = await expModel.updateOne(
-      { id: req.params.id},
+      { _id: req.params.id },
       { $set: req.body }
     );
-    const afterUpdate=await expModel.find({id:req.params.id})
+
+    const afterUpdate = await expModel.find({ _id: req.params.id });
     return res
       .status(200)
-      .json({ message: "experience updated successfully", experience: afterUpdate });
+      .json({
+        message: "experience updated successfully",
+        experience: afterUpdate,
+      });
   } catch (err) {
     console.log(err);
   }

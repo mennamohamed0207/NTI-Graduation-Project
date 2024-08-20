@@ -24,7 +24,7 @@ export class DashboardComponent {
   fieldOfEducation = ['college', 'department', 'university', 'degree', 'fromDate', 'toDate', 'cumulativeGrade'];
   fieldsOfSkills = ['skill', 'category'];
   fieldsOfContact = ['name', 'link'];
-  
+
 
 
   private subscription: Subscription | undefined;
@@ -111,21 +111,15 @@ export class DashboardComponent {
     this.experienceForm.get('org')?.setValue(this.experiences[index].org);
     this.experienceForm.get('fromDate')?.setValue(this.experiences[index].fromDate);
     this.experienceForm.get('toDate')?.setValue(this.experiences[index].toDate);
-    this.experienceForm.get('description')?.setValue(this.experiences[index].description);
-    this.experienceForm.get('tools')?.setValue(this.experiences[index].tools);
+    this.experienceForm.get('description')?.setValue(this.experiences[index].description.toString());
+    this.experienceForm.get('tools')?.setValue(this.experiences[index].tools.toString());
     this.experienceForm.get('githubLink')?.setValue(this.experiences[index].githubLink);
-    this.dataService.editExperience(id).subscribe((data) => {
-      console.log(data);
+    console.log(this.experienceForm.value);
+    
 
-
-      // Find the index of the experience with the matching id
-      const index = this.experiences.findIndex((exp: any) => exp._id === id);
-
-      // Only splice if the index is found
-      if (index !== -1) {
-        this.delete(id);
-      }
-    });
+    if (index !== -1) {
+      this.delete(id);
+    }
   }
   edit_edu(id: string) {
     const index = this.educations.findIndex((edu: any) => edu._id === id);
@@ -152,6 +146,7 @@ export class DashboardComponent {
     if (index !== -1) {
       this.dataService.editSkill(id).subscribe((data) => {
         this.deleteSkill(id);
+        // this.loadSkills();
       })
     }
   }
@@ -160,16 +155,16 @@ export class DashboardComponent {
     this.contactForm.get('name')?.setValue(this.contact[index].name);
     this.contactForm.get('link')?.setValue(this.contact[index].link);
     if (index !== -1) {
-     
-        this.deleteContact(id);
-      
+
+      this.deleteContact(id);
+
     }
   }
   delete(id: string) {
     console.log(id);
 
     this.dataService.deleteExperience(id).subscribe((data) => {
-      console.log(data);
+      // console.log(data);
 
       // Find the index of the experience with the matching id
       const index = this.experiences.findIndex((exp: any) => exp._id === id);
@@ -237,20 +232,20 @@ export class DashboardComponent {
       name: new FormControl(null, [Validators.required]),
       category: new FormControl(null, [Validators.required]),
     });
-    this.contactForm=new FormGroup({
+    this.contactForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       link: new FormControl(null, [Validators.required]),
     })
   }
 
   onSubmit() {
-    if (this.experienceForm.valid) {
+    // if (this.experienceForm.valid) {
       this.dataService.addExperience(this.experienceForm).subscribe((newExperience) => {
         // Assuming the API returns the newly added experience
         this.experiences.push(newExperience.experience);
         this.experienceForm.reset(); // Optional: reset the form after submission
       });
-    }
+    // }
 
   }
   onSubmit_edu() {
@@ -267,7 +262,7 @@ export class DashboardComponent {
       this.skillsForm.reset();
     })
   }
-  onSubmitContact(){
+  onSubmitContact() {
     this.dataService.addContact(this.contactForm).subscribe((newContact) => {
       this.contact.push(newContact.data);
       this.contactForm.reset();
