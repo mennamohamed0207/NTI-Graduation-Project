@@ -62,4 +62,12 @@ export class ExperienceService {
   editEducation(id:any): Observable<any> {
     return this.http.put(this.updateEducationUrl + id, id);
   }
+  deleteSkillUrl='http://127.0.0.1:3000/api/v1/skills/'
+  updateSkillUrl='http://127.0.0.1:3000/api/v1/skills/'
+  deleteSkill(id: any): Observable<any> {
+    return this.http.delete(this.deleteSkillUrl + id);
+  }
+  updateSkill(id:any): Observable<any> {
+    return this.http.put(this.updateSkillUrl + id, id);
+  }
 }

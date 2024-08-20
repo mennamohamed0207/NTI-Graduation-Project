@@ -122,6 +122,9 @@ export class DashboardComponent {
     }
 
   }
+  editSkill(id:string){
+    
+  }
   delete(id: string) {
     console.log(id);
 
@@ -144,6 +147,15 @@ export class DashboardComponent {
 
       if (index !== -1) {
         this.educations.splice(index, 1);
+      }
+    })
+  }
+  deleteSkill(id:string){
+    this.dataService.deleteSkill(id).subscribe((data)=>{
+      const index = this.skills.findIndex((edu: any) => edu._id === id);
+
+      if (index !== -1) {
+        this.skills.splice(index, 1);
       }
     })
   }
