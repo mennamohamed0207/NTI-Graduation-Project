@@ -156,7 +156,14 @@ export class DashboardComponent {
     }
   }
   editContact(id: string) {
-
+    const index = this.contact.findIndex((edu: any) => edu._id === id);
+    this.contactForm.get('name')?.setValue(this.contact[index].name);
+    this.contactForm.get('link')?.setValue(this.contact[index].link);
+    if (index !== -1) {
+     
+        this.deleteContact(id);
+      
+    }
   }
   delete(id: string) {
     console.log(id);
