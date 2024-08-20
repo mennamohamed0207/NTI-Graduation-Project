@@ -15,9 +15,11 @@ export class DashboardComponent {
   //Data
   experiences: any = [];
   educations: any = [];
+  skills: any = [];
   //Fields
   fieldOfExperience = ['title', 'org', 'fromDate', 'toDate', 'description', 'tools', 'githubLink'];
   fieldOfEducation = ['college', 'department', 'university', 'degree', 'fromDate', 'toDate', 'cumulativeGrade'];
+  fieldsOfSkills = ['skill', 'category'];
 
 
   private subscription: Subscription | undefined;
@@ -46,6 +48,16 @@ export class DashboardComponent {
       }
     });
   }
+  loadSkills(): void {
+    this.dataService.getSkills().subscribe((data) => {
+      if (data) {
+        this.skills = data.data;
+      }
+      else {
+        this.skills = [];
+      }
+    })
+  }
   getKeys_education() {
     if (this.educations.length > 1) {
       this.fieldOfEducation = Object.keys(this.educations[1]);
@@ -63,6 +75,13 @@ export class DashboardComponent {
       // console.log(this.fieldOfExperience);
     }
 
+  }
+  getKeys_skills() {
+    if(this.skills.length > 1){
+      this.fieldsOfSkills = Object.keys(this.skills[1]);
+      this.fieldsOfSkills.splice(0, 1); //deleting _id
+      this.fieldsOfSkills.splice(this.fieldsOfSkills.length - 1, 1); //deleting _v
+    }
   }
   edit(id: string) {
     const index = this.experiences.findIndex((exp: any) => exp._id === id);
@@ -87,7 +106,7 @@ export class DashboardComponent {
     });
   }
   edit_edu(id: string) {
-    const index=this.educations.findIndex((edu:any)=>edu._id===id);
+    const index = this.educations.findIndex((edu: any) => edu._id === id);
 
     this.educationForm.get('college')?.setValue(this.educations[index].college);
     this.educationForm.get('department')?.setValue(this.educations[index].department);
@@ -96,8 +115,8 @@ export class DashboardComponent {
     this.educationForm.get('university')?.setValue(this.educations[index].university);
     this.educationForm.get('degree')?.setValue(this.educations[index].degree);
     this.educationForm.get('CumulativeGrade')?.setValue(this.educations[index].CumulativeGrade);
-    if(index!==-1){
-      this.dataService.editEducation(id).subscribe((data)=>{
+    if (index !== -1) {
+      this.dataService.editEducation(id).subscribe((data) => {
         this.delete_edu(id);
       })
     }
@@ -114,17 +133,17 @@ export class DashboardComponent {
 
       // Only splice if the index is found
       if (index !== -1) {
-        
+
         this.experiences.splice(index, 1);
       }
     });
   }
   delete_edu(id: string) {
     this.dataService.deleteEducation(id).subscribe((data) => {
-      const index=this.educations.findIndex((edu:any)=>edu._id===id);
+      const index = this.educations.findIndex((edu: any) => edu._id === id);
 
-      if(index!==-1){
-        this.educations.splice(index,1);
+      if (index !== -1) {
+        this.educations.splice(index, 1);
       }
     })
   }
@@ -132,6 +151,7 @@ export class DashboardComponent {
   ngOnInit(): void {
     this.loadExperience();
     this.loadEducation();
+    this.loadSkills();
     this.experienceForm = new FormGroup({
       title: new FormControl(null, [Validators.required]),
       org: new FormControl(null, [Validators.required]),
@@ -164,11 +184,11 @@ export class DashboardComponent {
   }
   onSubmit_edu() {
     // if(this.educationForm.valid){
-      this.dataService.addEducation(this.educationForm).subscribe((newEducation) => {
-        // Assuming the API returns the newly added education
-        this.educations.push(newEducation.education);
-        this.educationForm.reset(); // Optional: reset the form after submission
-      })
-    }
+    this.dataService.addEducation(this.educationForm).subscribe((newEducation) => {
+      // Assuming the API returns the newly added education
+      this.educations.push(newEducation.education);
+      this.educationForm.reset(); // Optional: reset the form after submission
+    })
+  }
   // }
 }

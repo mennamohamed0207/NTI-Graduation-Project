@@ -126,3 +126,24 @@
     <br />
     <button type="submit" class="btn btn-primary btn-block">Submit</button>
 </form>
+
+<h1>Skills</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col" *ngFor="let i of fieldsOfSkills">{{i}}</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of skills">
+            <th scope="row">{{i.name}}</th>
+            <th scope="row">{{i.category}}</th>
+            
+            <th scope="row"><button class="btn btn-warning" (click)="edit_edu(i._id)">Edit</button></th>
+            <th scope="row"><button class="btn btn-danger" (click)="delete_edu(i._id)">Delete</button></th>
+
+        </tr>
+
+    </tbody>
+</table>
