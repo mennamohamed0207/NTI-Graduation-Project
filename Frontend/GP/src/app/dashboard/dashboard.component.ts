@@ -16,18 +16,21 @@ export class DashboardComponent {
   skillsForm!: FormGroup;
   contactForm!: FormGroup;
   aboutForm!: FormGroup;
+  projectForm!: FormGroup;
   //Data
   experiences: any = [];
   educations: any = [];
   skills: any = [];
   contact: any = [];
   Bio: any = [];
+  projects: any = [];
   //Fields
   fieldOfExperience = ['title', 'org', 'fromDate', 'toDate', 'description', 'tools', 'githubLink'];
   fieldOfEducation = ['college', 'department', 'university', 'degree', 'fromDate', 'toDate', 'cumulativeGrade'];
   fieldsOfSkills = ['skill', 'category'];
   fieldsOfContact = ['name', 'link'];
   fieldsOfAbout = ['about'];
+  fieldsOfProjects = ['name', 'description', 'link','languages','tools','role'];
 
 
 
@@ -86,12 +89,29 @@ export class DashboardComponent {
      
     })
   }
+  loadProjects()
+  {
+    this.dataService.getProjects().subscribe((data) => {
+      if (data) {
+        this.projects = data.data;
+        this.getKeysProjects();
+      }
+     
+    })
+  }
   getKeys_education() {
     if (this.educations.length > 1) {
       this.fieldOfEducation = Object.keys(this.educations[1]);
       this.fieldOfEducation.splice(0, 1); //deleting _id
       this.fieldOfEducation.splice(this.fieldOfEducation.length - 1, 1); //deleting _v
       // console.log(this.fieldOfEducation);
+    }
+  }
+  getKeysProjects() {
+    if (this.projects.length > 1) {
+      this.fieldsOfProjects = Object.keys(this.projects[1]);
+      this.fieldsOfProjects.splice(0, 1); //deleting _id
+      this.fieldsOfProjects.splice(this.fieldsOfProjects.length - 1, 1); //deleting _v
     }
   }
   getKeysAbout() {
@@ -186,6 +206,18 @@ export class DashboardComponent {
     this.BioId=id;
   
   }
+  editProject(id:string):void{
+    const index=this.projects.findIndex((project:any)=>project._id===id);
+    this.projectForm.get('name')?.setValue(this.projects[index].name);
+    this.projectForm.get('description')?.setValue(this.projects[index].description);
+    this.projectForm.get('link')?.setValue(this.projects[index].link);
+    this.projectForm.get('languages')?.setValue(this.projects[index].languages.toString());
+    this.projectForm.get('tools')?.setValue(this.projects[index].tools.toString());
+    this.projectForm.get('role')?.setValue(this.projects[index].role);
+    if(index!==-1){
+      this.deleteProject(id);
+    }
+  }
   delete(id: string) {
     console.log(id);
 
@@ -201,6 +233,14 @@ export class DashboardComponent {
         this.experiences.splice(index, 1);
       }
     });
+  }
+  deleteProject(id:string){
+    this.dataService.deleteProject(id).subscribe((data)=>{
+      const index=this.projects.findIndex((project:any)=>project._id===id);
+      if(index!==-1){
+        this.projects.splice(index,1);
+      }
+    })
   }
   delete_edu(id: string) {
     this.dataService.deleteEducation(id).subscribe((data) => {
@@ -237,6 +277,7 @@ export class DashboardComponent {
     this.loadSkills();
     this.loadContacts();
     this.loadBio();
+    this.loadProjects();
     this.experienceForm = new FormGroup({
       title: new FormControl(null, [Validators.required]),
       org: new FormControl(null, [Validators.required]),
@@ -266,6 +307,14 @@ export class DashboardComponent {
     this.aboutForm = new FormGroup({
       about: new FormControl(null, [Validators.required]),
     });
+    this.projectForm = new FormGroup({
+      name: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, [Validators.required]),
+      link: new FormControl(null, [Validators.required]),
+      languages: new FormControl(null, [Validators.required]),
+      tools: new FormControl(null, [Validators.required]),
+      role: new FormControl(null, [Validators.required]),
+    })
   
   }
 
@@ -304,6 +353,12 @@ export class DashboardComponent {
       this.Bio=data.about;
       this.loadBio();
         
+    })
+  }
+  onSumbitProject() {
+    this.dataService.addProject(this.projectForm).subscribe((newProject) => {
+      this.projects.push(newProject.data);
+      this.projectForm.reset();
     })
   }
 }

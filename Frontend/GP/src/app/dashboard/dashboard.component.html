@@ -24,19 +24,7 @@
     <br />
     <button type="submit" class="btn btn-primary btn-block">Submit</button>
 </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
+<hr />
 <h1>Experience</h1>
 <table class="table">
     <thead>
@@ -166,6 +154,59 @@
     <button type="submit" class="btn btn-primary btn-block">Submit</button>
 </form>
 <hr />
+<h1>Projects</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col" *ngFor="let i of fieldsOfProjects">{{i}}</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of projects">
+            <th scope="row">{{i.name}}</th>
+            <th scope="row">{{i.description}}</th>
+            <th scope="row" *ngIf="i.link"><a href={{i.link}}><button class="btn btn-primary">Github
+                        repo</button></a></th>
+            <th scope="row">{{i.languages}}</th>
+            <th scope="row">{{i.tools}}</th>
+            <th scope="row">{{i.role}}</th>
+            <th scope="row"><button class="btn btn-warning" (click)="editProject(i._id)">Edit</button></th>
+            <th scope="row"><button class="btn btn-danger" (click)="deleteProject(i._id)">Delete</button></th>
+        </tr>
+    </tbody>
+</table>
+
+<form [formGroup]="projectForm" (ngSubmit)="onSumbitProject()">
+    <div class="form-group">
+        <label for="name">{{fieldsOfProjects[0]|titlecase}}</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter skill" formControlName="name">
+    </div>
+    <div class="form-group">
+        <label for="description">{{fieldsOfProjects[1]|titlecase}}</label>
+        <input type="text" class="form-control" id="description" placeholder="Enter description" formControlName="description">
+    </div>
+    <div class="form-group">
+        <label for="link">{{fieldsOfProjects[2]|titlecase}}</label>
+        <input type="text" class="form-control" id="link" placeholder="Enter link" formControlName="link">
+    </div>
+    <div class="form-group">
+        <label for="languages">{{fieldsOfProjects[3]|titlecase}}</label>
+        <input type="text" class="form-control" id="languages" placeholder="Enter languages" formControlName="languages">
+    </div>
+    <div class="form-group">
+        <label for="role">{{fieldsOfProjects[4]|titlecase}}</label>
+        <input type="text" class="form-control" id="role" placeholder="Enter role" formControlName="role">
+    </div>
+    <div class="form-group">
+        <label for="tools">{{fieldsOfProjects[5]|titlecase}}</label>
+        <input type="text" class="form-control" id="tools" placeholder="Enter tools" formControlName="tools">
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+</form>
+
+
 <h1>Skills</h1>
 <table class="table">
     <thead>
@@ -233,4 +274,4 @@
     <button type="submit" class="btn btn-primary btn-block">Submit</button>
 </form>
 
-<hr/>
+<hr />

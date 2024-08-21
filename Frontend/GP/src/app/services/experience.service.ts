@@ -94,4 +94,10 @@ export class ExperienceService {
     
     return this.http.put(this.getaboutUrl+id,aboutForm);
   }
+  deleteProject(id:string):Observable<any>{ 
+    return this.http.delete(this.getProjectsUrl+id)
+  }
+  addProject(projectForm:any):Observable<any>{
+    return this.http.post(this.getProjectsUrl,projectForm.value)
+  }
 }
