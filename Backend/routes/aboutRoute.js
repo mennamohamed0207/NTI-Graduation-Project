@@ -6,6 +6,6 @@ const router=express.Router();
 
 router.post("/",createAbout);
 router.get("/",getAbout);
-router.put("/:degree",updateAbout);
+router.put("/:id",updateAbout);
 
 module.exports=router;

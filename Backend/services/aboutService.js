@@ -24,12 +24,14 @@ exports.getAbout = async (req, res) => {
 exports.updateAbout = async (req, res) => {
   try {
     const data = await aboutModel.updateOne(
-      { degree: req.params.degree },
+      { _id: req.params.id },
       { $set: req.body }
     );
+    console.log(req.body);
+    const data1 = await aboutModel.findOne({ _id: req.params.id });
     res
       .status(200)
-      .json({ message: "education updated successfully", data: data });
+      .json({ message: "education updated successfully", about: data1 });
   } catch (err) {
     console.log(err);
   }

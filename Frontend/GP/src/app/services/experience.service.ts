@@ -89,4 +89,9 @@ export class ExperienceService {
   addContact(contactForm:any):Observable<any>{
     return this.http.post(this.addContactUrl,contactForm.value)
   }
+  editAbout(id:string,aboutForm:any):Observable<any>{
+    console.log(aboutForm.value);
+    
+    return this.http.put(this.getaboutUrl+id,aboutForm);
+  }
 }

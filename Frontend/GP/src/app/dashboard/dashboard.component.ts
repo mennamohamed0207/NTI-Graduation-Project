@@ -9,21 +9,25 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
+  BioId: any;
   //Forms
   experienceForm!: FormGroup;
   educationForm!: FormGroup;
   skillsForm!: FormGroup;
   contactForm!: FormGroup;
+  aboutForm!: FormGroup;
   //Data
   experiences: any = [];
   educations: any = [];
   skills: any = [];
   contact: any = [];
+  Bio: any = [];
   //Fields
   fieldOfExperience = ['title', 'org', 'fromDate', 'toDate', 'description', 'tools', 'githubLink'];
   fieldOfEducation = ['college', 'department', 'university', 'degree', 'fromDate', 'toDate', 'cumulativeGrade'];
   fieldsOfSkills = ['skill', 'category'];
   fieldsOfContact = ['name', 'link'];
+  fieldsOfAbout = ['about'];
 
 
 
@@ -73,6 +77,15 @@ export class DashboardComponent {
       }
     })
   }
+  loadBio(): void {
+    this.dataService.getAbout().subscribe((data) => {
+      if (data) {
+        this.Bio = data.data;
+        this.getKeysAbout();
+      }
+     
+    })
+  }
   getKeys_education() {
     if (this.educations.length > 1) {
       this.fieldOfEducation = Object.keys(this.educations[1]);
@@ -80,6 +93,13 @@ export class DashboardComponent {
       this.fieldOfEducation.splice(this.fieldOfEducation.length - 1, 1); //deleting _v
       // console.log(this.fieldOfEducation);
     }
+  }
+  getKeysAbout() {
+    // if (this.Bio.length ) {
+      this.fieldsOfAbout = Object.keys(this.Bio[0]);
+      this.fieldsOfAbout.splice(0, 1); //deleting _id
+      this.fieldsOfAbout.splice(this.fieldsOfAbout.length - 1, 1); //deleting _v
+    // }
   }
   getKeys() {
     if (this.experiences.length > 1) {
@@ -160,6 +180,12 @@ export class DashboardComponent {
 
     }
   }
+  editAbout(id:string):void{
+    const index=this.Bio.findIndex((bio:any)=>bio._id===id);
+    this.aboutForm.get('about')?.setValue(this.Bio[index].about);
+    this.BioId=id;
+  
+  }
   delete(id: string) {
     console.log(id);
 
@@ -210,6 +236,7 @@ export class DashboardComponent {
     this.loadEducation();
     this.loadSkills();
     this.loadContacts();
+    this.loadBio();
     this.experienceForm = new FormGroup({
       title: new FormControl(null, [Validators.required]),
       org: new FormControl(null, [Validators.required]),
@@ -235,7 +262,11 @@ export class DashboardComponent {
     this.contactForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       link: new FormControl(null, [Validators.required]),
-    })
+    });
+    this.aboutForm = new FormGroup({
+      about: new FormControl(null, [Validators.required]),
+    });
+  
   }
 
   onSubmit() {
@@ -266,6 +297,13 @@ export class DashboardComponent {
     this.dataService.addContact(this.contactForm).subscribe((newContact) => {
       this.contact.push(newContact.data);
       this.contactForm.reset();
+    })
+  }
+  onSubmitAbout() {
+    this.dataService.editAbout(this.BioId,this.aboutForm.value).subscribe((data)=>{
+      this.Bio=data.about;
+      this.loadBio();
+        
     })
   }
 }
