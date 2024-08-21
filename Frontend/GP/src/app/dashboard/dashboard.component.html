@@ -184,11 +184,11 @@
 <form [formGroup]="contactForm" (ngSubmit)="onSubmitContact()">
     <div class="form-group">
         <label for="name">{{fieldsOfContact[0]|titlecase}}</label>
-        <input type="text" class="form-control" id="name" placeholder="Enter skill" formControlName="name">
+        <input type="text" class="form-control" id="name" placeholder="Enter name" formControlName="name">
     </div>
     <div class="form-group">
         <label for="link">{{fieldsOfContact[1]|titlecase}}</label>
-        <input type="text" class="form-control" id="link" placeholder="Enter category" formControlName="link">
+        <input type="text" class="form-control" id="link" placeholder="Enter link" formControlName="link">
     </div>
     <br />
     <button type="submit" class="btn btn-primary btn-block">Submit</button>
