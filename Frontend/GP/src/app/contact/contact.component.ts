@@ -7,52 +7,16 @@ import { ExperienceService } from '../services/experience.service';
   styleUrl: './contact.component.css'
 })
 export class ContactComponent {
-  public gmail="email";
-  public github="mennamohamed0207";
-  public linkedin="mennamohamed0207";
-  public facebook="mennamohamed0207";
+  public gmail="menamohamed0207@gmail.com";
+  public github="https://github.com/mennamohamed0207/";
+  public linkedin="https://www.linkedin.com/in/menna-mohamed-15ba5821b/";
+  public facebook="https://www.facebook.com/profile.php?id=100004080760812";
   public phone="01013222936";
-  public resume="";
-  constructor(private dataService: ExperienceService) {}
+  public resume="https://drive.google.com/file/d/1wKpkFRLQBiBWQYFYoCnT--nDyHxKO7lC/view?usp=drive_link";
+  constructor() {}
 
   ngOnInit(): void {
-    this.dataService.getContacts().subscribe(
-      (response) => {
-        const data = response.data;
-        // console.log(data);
-        
-        this.mapContactLinks(data);
-      },
-      (error) => {
-        console.error('Error fetching contact data:', error);
-      }
-    );
   }
 
-  private mapContactLinks(data: any): void {
-    data.forEach((item: any) => {
-      switch (item.name.toLowerCase()) {
-        case 'phone':
-          this.phone = item.link;
-          break;
-        case 'gmail':
-          this.gmail = item.link;
-          break;
-        case 'github':
-          this.github = item.link;
-          break;
-        case 'linkdedin':
-          this.linkedin = item.link;
-          break;
-        case 'facebook':
-          this.facebook = item.link;
-          break;
-        case 'resume':
-          this.resume = item.link;
-          break;
-        default:
-          break;
-      }
-    });
-  }
+  
 }
