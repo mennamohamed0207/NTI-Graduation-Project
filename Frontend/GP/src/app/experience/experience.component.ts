@@ -36,7 +36,7 @@ export class ExperienceComponent implements OnInit, OnDestroy {
       "fromDate": "Feb.2023",
       "toDate": "Apr.2023",
       "description": [""],
-      "tools": ["", "MySQL"]
+      "tools": ["", ""]
     },
 
     {
