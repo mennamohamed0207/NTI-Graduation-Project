@@ -19,6 +19,7 @@ import { HttpLink, InMemoryCache } from '@apollo/client';
 import { GithubCalenderComponent } from './github-calender/github-calender.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     GithubCardComponent,
     GithubCalenderComponent,
-    DashboardComponent],
+    DashboardComponent,
+    LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
