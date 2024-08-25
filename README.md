@@ -1,6 +1,10 @@
-//type:mongoose.Schema.Types.ObjectId
-//ref:'skills'  
-
-//and when calling find call populate('skills')
-
-//bcrypt
+# My Portfolio 
+## Screenshots of main sections 📸
+### About 🚶‍♀️
+![alt text](about.png)
+### Education
+![alt text](education.png)
+### skills
+![alt text](skills.png)
+### Contact
+![alt text](contact.png)

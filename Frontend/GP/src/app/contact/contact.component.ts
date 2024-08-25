@@ -7,7 +7,7 @@ import { ExperienceService } from '../services/experience.service';
   styleUrl: './contact.component.css'
 })
 export class ContactComponent {
-  public gmail="email";
+  public gmail="menamohamed0207@gmail.com";
   public github="mennamohamed0207";
   public linkedin="mennamohamed0207";
   public facebook="mennamohamed0207";
