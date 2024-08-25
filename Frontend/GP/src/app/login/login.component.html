@@ -1,4 +1,4 @@
-<form [formGroup]="login" (ngSubmit)="onSumbit()">
+<form [formGroup]="login" (ngSubmit)="onSumbit()" style="margin: 20px;">
     <div class="form-group">
         <label for="username">Username</label>
         <input type="text" class="form-control" id="username" placeholder="username" formControlName="username">
@@ -8,7 +8,8 @@
         <input type="text" class="form-control" id="password" placeholder="password" formControlName="password">
     </div>
     <br/>
-    <div class="alert alert-danger">{{message}}</div>
+    <div *ngIf="message" class="alert alert-danger">{{message}}</div>
+    <div *ngIf="islogin()" class="alert alert-success">You are authenticated already</div>
 
     <br />
     <button type="submit" class="btn btn-primary btn-block">Submit</button>

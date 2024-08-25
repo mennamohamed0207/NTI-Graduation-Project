@@ -18,6 +18,9 @@ export class LoginComponent {
       password: new FormControl(null, [Validators.required]),
     });
   }
+  islogin() {
+    return this.dataService.isAuthenticated();
+  }
   constructor(private dataService: AuthService, private router: Router) {}
   onSumbit() {
     console.log(this.login.value);

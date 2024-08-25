@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ExperienceService } from '../services/experience.service';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,12 +31,12 @@ export class DashboardComponent {
   fieldsOfSkills = ['skill', 'category'];
   fieldsOfContact = ['name', 'link'];
   fieldsOfAbout = ['about'];
-  fieldsOfProjects = ['name', 'description', 'link','languages','tools','role'];
+  fieldsOfProjects = ['name', 'description', 'link', 'languages', 'tools', 'role'];
 
 
 
   private subscription: Subscription | undefined;
-  constructor(private dataService: ExperienceService) { }
+  constructor(private dataService: ExperienceService, private auth: AuthService) { }
 
   loadExperience(): void {
     this.dataService.getExperience().subscribe((data) => {
@@ -86,17 +87,16 @@ export class DashboardComponent {
         this.Bio = data.data;
         this.getKeysAbout();
       }
-     
+
     })
   }
-  loadProjects()
-  {
+  loadProjects() {
     this.dataService.getProjects().subscribe((data) => {
       if (data) {
         this.projects = data.data;
         this.getKeysProjects();
       }
-     
+
     })
   }
   getKeys_education() {
@@ -116,9 +116,9 @@ export class DashboardComponent {
   }
   getKeysAbout() {
     // if (this.Bio.length ) {
-      this.fieldsOfAbout = Object.keys(this.Bio[0]);
-      this.fieldsOfAbout.splice(0, 1); //deleting _id
-      this.fieldsOfAbout.splice(this.fieldsOfAbout.length - 1, 1); //deleting _v
+    this.fieldsOfAbout = Object.keys(this.Bio[0]);
+    this.fieldsOfAbout.splice(0, 1); //deleting _id
+    this.fieldsOfAbout.splice(this.fieldsOfAbout.length - 1, 1); //deleting _v
     // }
   }
   getKeys() {
@@ -155,7 +155,7 @@ export class DashboardComponent {
     this.experienceForm.get('tools')?.setValue(this.experiences[index].tools.toString());
     this.experienceForm.get('githubLink')?.setValue(this.experiences[index].githubLink);
     console.log(this.experienceForm.value);
-    
+
 
     if (index !== -1) {
       this.delete(id);
@@ -200,21 +200,21 @@ export class DashboardComponent {
 
     }
   }
-  editAbout(id:string):void{
-    const index=this.Bio.findIndex((bio:any)=>bio._id===id);
+  editAbout(id: string): void {
+    const index = this.Bio.findIndex((bio: any) => bio._id === id);
     this.aboutForm.get('about')?.setValue(this.Bio[index].about);
-    this.BioId=id;
-  
+    this.BioId = id;
+
   }
-  editProject(id:string):void{
-    const index=this.projects.findIndex((project:any)=>project._id===id);
+  editProject(id: string): void {
+    const index = this.projects.findIndex((project: any) => project._id === id);
     this.projectForm.get('name')?.setValue(this.projects[index].name);
     this.projectForm.get('description')?.setValue(this.projects[index].description);
     this.projectForm.get('link')?.setValue(this.projects[index].link);
     this.projectForm.get('languages')?.setValue(this.projects[index].languages.toString());
     this.projectForm.get('tools')?.setValue(this.projects[index].tools.toString());
     this.projectForm.get('role')?.setValue(this.projects[index].role);
-    if(index!==-1){
+    if (index !== -1) {
       this.deleteProject(id);
     }
   }
@@ -234,11 +234,11 @@ export class DashboardComponent {
       }
     });
   }
-  deleteProject(id:string){
-    this.dataService.deleteProject(id).subscribe((data)=>{
-      const index=this.projects.findIndex((project:any)=>project._id===id);
-      if(index!==-1){
-        this.projects.splice(index,1);
+  deleteProject(id: string) {
+    this.dataService.deleteProject(id).subscribe((data) => {
+      const index = this.projects.findIndex((project: any) => project._id === id);
+      if (index !== -1) {
+        this.projects.splice(index, 1);
       }
     })
   }
@@ -315,16 +315,16 @@ export class DashboardComponent {
       tools: new FormControl(null, [Validators.required]),
       role: new FormControl(null, [Validators.required]),
     })
-  
+
   }
 
   onSubmit() {
     // if (this.experienceForm.valid) {
-      this.dataService.addExperience(this.experienceForm).subscribe((newExperience) => {
-        // Assuming the API returns the newly added experience
-        this.experiences.push(newExperience.experience);
-        this.experienceForm.reset(); // Optional: reset the form after submission
-      });
+    this.dataService.addExperience(this.experienceForm).subscribe((newExperience) => {
+      // Assuming the API returns the newly added experience
+      this.experiences.push(newExperience.experience);
+      this.experienceForm.reset(); // Optional: reset the form after submission
+    });
     // }
 
   }
@@ -349,10 +349,10 @@ export class DashboardComponent {
     })
   }
   onSubmitAbout() {
-    this.dataService.editAbout(this.BioId,this.aboutForm.value).subscribe((data)=>{
-      this.Bio=data.about;
+    this.dataService.editAbout(this.BioId, this.aboutForm.value).subscribe((data) => {
+      this.Bio = data.about;
       this.loadBio();
-        
+
     })
   }
   onSumbitProject() {
@@ -360,5 +360,8 @@ export class DashboardComponent {
       this.projects.push(newProject.data);
       this.projectForm.reset();
     })
+  }
+  logout() {
+    this.auth.logOut();
   }
 }

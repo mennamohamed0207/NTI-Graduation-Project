@@ -9,6 +9,7 @@ import { EducationComponent } from './education/education.component';
 import { DataResolver } from './dataResolver';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { memberAuthGuard } from './member-auth.guard';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -35,7 +36,8 @@ const routes: Routes = [
   },
   {
     path:"dashboard",
-    component:DashboardComponent
+    component:DashboardComponent,
+    canActivate:[memberAuthGuard]
   },
   {
     path:"login",
