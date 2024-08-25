@@ -100,4 +100,8 @@ export class ExperienceService {
   addProject(projectForm:any):Observable<any>{
     return this.http.post(this.getProjectsUrl,projectForm.value)
   }
+  loginUrl='http://127.0.0.1:3000/api/v1/user/login'
+  login(loginForm:any):Observable<any>{
+    return this.http.post(this.loginUrl,loginForm.value);
+  }
 }

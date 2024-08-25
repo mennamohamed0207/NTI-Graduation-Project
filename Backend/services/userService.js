@@ -21,8 +21,14 @@ exports.getUsers = async (req,res)=>{
 }
 
 exports.login = async(req,res)=>{
+    console.log(req.body);
+    
     const {username,password} = req.body;
+    console.log(username,password);
+    
     const user = await User.findOne({username});
+    console.log(user);
+    
     if(!user){
         res.status(400).send('Email not found');
     }
