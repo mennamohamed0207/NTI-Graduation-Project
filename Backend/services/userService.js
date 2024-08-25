@@ -5,9 +5,9 @@ require('dotenv').config();
 
 exports.createUser = async (req,res)=>{
     try{
-    const {name,email,password,userType} = req.body;
+    const {username,password} = req.body;
     const hashedPassword = await bcrypt.hash(password,10);
-    const user = await User.create({name,email,password:hashedPassword,userType});
+    const user = await User.create({username,password:hashedPassword});
     res.status(201).json(user);
     }
     catch(err){
@@ -16,26 +16,26 @@ exports.createUser = async (req,res)=>{
 }
 
 exports.getUsers = async (req,res)=>{
-    const users = await User.find().populate('userType');
+    const users = await User.find();
     res.status(200).json(users);
 }
 
 exports.login = async(req,res)=>{
-    const {email,password} = req.body;
-    const user = await User.findOne({email});
+    const {username,password} = req.body;
+    const user = await User.findOne({username});
     if(!user){
         res.status(400).send('Email not found');
     }
     const isMatch = await bcrypt.compare(password,user.password);
     if(!isMatch){ 
-        res.status(400).send('password not correct')
+        res.status(400).json({message:'Wrong password',isMatch:isMatch});
     } 
   
     const token = jwt.sign(
-        {userId : user._id,userType : user.userType},
+        {userId : user._id},
         process.env.secret_key,
         {expiresIn : '1h'}
     )
-    res.status(200).json(token);
+    res.status(200).json({token:token,isMatch:isMatch});
 
 }
