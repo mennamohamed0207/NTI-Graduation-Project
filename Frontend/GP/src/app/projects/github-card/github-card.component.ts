@@ -23,7 +23,6 @@ export class GithubCardComponent implements OnInit {
     console.log(this.tools);
   }
   openLink(link: String) {
-    // document.location.href = link
   }
 
 
