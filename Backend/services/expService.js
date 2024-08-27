@@ -8,11 +8,11 @@ exports.createExperience = async (req, res) => {
     //convert array to string
     // req.body.tools = tools.join(",");
     // req.body.description = description.join(",");
-    req.body.description = description.split(",");
+    req.body.description = description.split("|");
    // Format dates to YYYY-MM-DD
    req.body.fromDate = new Date(fromDate).toISOString().split("T")[0];
    req.body.toDate = new Date(toDate).toISOString().split("T")[0];
-    req.body.tools = tools.split(",");
+    req.body.tools = tools.split("|");
     const exp = await expModel.create(req.body);
     return res
       .status(200)
