@@ -18,7 +18,7 @@
 
 <form [formGroup]="aboutForm" (ngSubmit)="onSubmitAbout()">
     <div class="form-group">
-        <label for="about">{{fieldsOfAbout[0]|titlecase}}</label>
+        <label for="about">{{fieldsOfAbout[0]| titlecase}}</label>
         <input type="text" class="form-control" id="about" placeholder="Enter about" formControlName="about">
     </div>
     <br />
@@ -180,7 +180,7 @@
 <form [formGroup]="projectForm" (ngSubmit)="onSumbitProject()">
     <div class="form-group">
         <label for="name">{{fieldsOfProjects[0]|titlecase}}</label>
-        <input type="text" class="form-control" id="name" placeholder="Enter skill" formControlName="name">
+        <input type="text" class="form-control" id="name" placeholder="Enter Project name" formControlName="name">
     </div>
     <div class="form-group">
         <label for="description">{{fieldsOfProjects[1]|titlecase}}</label>
@@ -192,15 +192,15 @@
     </div>
     <div class="form-group">
         <label for="languages">{{fieldsOfProjects[3]|titlecase}}</label>
-        <input type="text" class="form-control" id="languages" placeholder="Enter languages" formControlName="languages">
+        <input type="text" class="form-control" id="languages" placeholder="Enter languages used separated by |" formControlName="languages">
     </div>
     <div class="form-group">
         <label for="role">{{fieldsOfProjects[4]|titlecase}}</label>
-        <input type="text" class="form-control" id="role" placeholder="Enter role" formControlName="role">
+        <input type="text" class="form-control" id="role" placeholder="Enter your role " formControlName="role">
     </div>
     <div class="form-group">
         <label for="tools">{{fieldsOfProjects[5]|titlecase}}</label>
-        <input type="text" class="form-control" id="tools" placeholder="Enter tools" formControlName="tools">
+        <input type="text" class="form-control" id="tools" placeholder="Enter tools separated by |" formControlName="tools">
     </div>
     <br />
     <button type="submit" class="btn btn-primary btn-block">Submit</button>
