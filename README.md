@@ -8,3 +8,6 @@
 ![alt text](skills.png)
 ### Contact
 ![alt text](contact.png)
+
+## Screenshots of dashboard
+![alt text](dashboard.png)
